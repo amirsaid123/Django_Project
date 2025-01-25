@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Products in Category</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 50px auto;
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #3498db;
+            font-size: 36px;
+            margin-bottom: 30px;
+        }
+
+        .product-card {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+
+        .product-title {
+            font-size: 24px;
+            color: #333;
+        }
+
+        .product-category, .product-price {
+            color: #555;
+            font-size: 18px;
+        }
+
+        .product-price {
+            color: #e74c3c;
+            font-weight: bold;
+        }
+
+        .product-description {
+            font-size: 16px;
+            color: #777;
+            margin-top: 10px;
+        }
+
+        .no-products {
+            text-align: center;
+            color: #f39c12;
+            font-size: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Products in Category: {{ name }}</h1>
+
+        {% if products %}
+            {% for product in products %}
+                <div class="product-card">
+                    <h2 class="product-title">{{ product.title }}</h2>
+                    <p class="product-category">Category: {{ product.category }}</p>
+                    <p class="product-price">${{ product.price }}</p>
+                    <p class="product-description">{{ product.description }}</p>
+                </div>
+            {% endfor %}
+        {% else %}
+            <p class="no-products">No products found in this category.</p>
+        {% endif %}
+    </div>
+
+</body>
+</html>
