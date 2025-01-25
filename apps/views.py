@@ -1,7 +1,7 @@
 import json
+from django.http import JsonResponse
 from django.shortcuts import render
-from django.http import HttpResponse, JsonResponse
-from django.shortcuts import render
+
 
 # Create your views here.
 
@@ -106,12 +106,6 @@ def product_list(request):
     context = {'products': products}
     return render(request, 'products_list.html', context)
 
-
-import json
-from django.shortcuts import render
-
-import json
-from django.shortcuts import render
 
 def show_category(request, category):
     with open('datas/products.json', 'r') as f:
