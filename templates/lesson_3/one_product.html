@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title itemprop="name">Product View - Beautiful Gallery</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+    <script type='text/javascript' src='https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js'></script>
+    <script src="https://netdna.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+    <style>
+        body {
+            margin-top: 20px;
+            background-color: #f8f9fa;
+        }
+
+        .product-gallery {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .gallery-item {
+            position: relative;
+            width: calc(33.33% - 10px); /* 3 items per row */
+            overflow: hidden;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .gallery-item:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
+            transition: transform 0.3s ease;
+        }
+
+        .gallery-item img:hover {
+            transform: scale(1.1);
+        }
+
+        @media (max-width: 767px) {
+            .gallery-item {
+                width: calc(50% - 10px); /* 2 items per row on smaller screens */
+            }
+        }
+
+        @media (max-width: 480px) {
+            .gallery-item {
+                width: 100%; /* 1 item per row on very small screens */
+            }
+        }
+
+        .container {
+            margin-top: 30px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h2 class="text-center">Product Gallery</h2>
+        <div class="row">
+            <div class="col-sm-6 push-bit">
+                <!-- Main Product Image -->
+                <a href="#" class="gallery-link">
+                    <img src="{{ product.main_image.url }}" alt="{{ product.title }}" class="img-responsive push-bit"/>
+                </a>
+
+                <!-- Loop Through Other Images -->
+                <div class="row push-bit">
+                    {% for image in product.images.all %}
+                        <div class="col-xs-4">
+                            <a href="#" class="gallery-link">
+                                <img src="{{ image.image.url }}" alt="{{ product.title }}" class="img-responsive"/>
+                            </a>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+
+            <div class="col-sm-6 push-bit">
+                <div class="clearfix">
+                    <div class="pull-right">
+                        <span class="h2"><strong>$ {{ product.price }}</strong></span>
+                    </div>
+                    <span class="h4"><strong class="text-success">{{ product.title }}</strong><br />
+                        <small>{{ product.available }}</small>
+                    </span>
+                </div>
+                <hr />
+                <p>{{ product.description }}</p>
+                <hr />
+                <form action="" method="post" class="form-inline push-bit text-right">
+                    <select id="ecom-addcart-size" name="ecom-addcart-size" class="form-control" size="1">
+                        <option value="0" disabled="" selected="">SIZE</option>
+                        <option value="xs">XS</option>
+                        <option value="s">S</option>
+                        <option value="m">M</option>
+                        <option value="l">L</option>
+                        <option value="xl">XL</option>
+                        <option value="xxl">XXL</option>
+                    </select>
+                    <button type="submit" class="btn btn-info">Add to Cart</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
+
+
+
+    <style type="text/css">body {
+        margin-top: 20px;
+    }
+
+    .push-bit {
+        margin-bottom: 30px;
+    }</style>
+    <script type="text/javascript"></script>
+</div>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-F1RTS0P1CD"></script>
+<script>window.dataLayer = window.dataLayer || [];
+
+function gtag() {
+    dataLayer.push(arguments);
+}
+
+gtag('js', new Date());
+
+gtag('config', 'G-F1RTS0P1CD');</script>
+</body>
+</html>

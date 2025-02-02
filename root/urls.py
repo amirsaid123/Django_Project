@@ -16,19 +16,15 @@ Including another URLconf
 """
 
 from django.contrib import admin
-from django.urls import path
-from apps import views
+from django.urls import path, include
+from django.conf import settings  # Import settings
+from django.conf.urls.static import static  # Import static for serving media files
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('say_hello/', views.say_hello),
-    path('product/<int:id>', views.show_products),
-    path('user/<str:username>', views.show_username),
-    # path('product/', views.show_seach),
-    path('product/', views.show_prices),
-    path('books/<int:id>', views.show_books),
-    path('hello_django/', views.hello_django),
-    path('django_info/', views.django_info),
-    path('products_list/', views.product_list),
-    path('products/category/<str:category>', views.show_category),
+    path('', include('apps.urls'))
 ]
+
+# Add media file serving only in development
+if settings.DEBUG:  # Ensure it's only done in development mode
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -1,13 +1,13 @@
 import json
+from django.contrib.auth.models import User
 from django.http import JsonResponse
 from django.shortcuts import render
+from apps.models import Job, Product, Plan, OnlyProduct, Images
 
-
-# Create your views here.
 
 def say_hello(request):
     name = request.GET.get('name')
-    return render(request, 'hello.html', {'name': name})
+    return render(request, 'lesson_1/hello.html', {'name': name})
 
 def show_products(request, id):
     with open('datas/products.json', 'r') as f:
@@ -19,9 +19,8 @@ def show_products(request, id):
 
     return None
 
-
 def show_username(request, username):
-    return render(request, 'username.html', {'username': username})
+    return render(request, 'lesson_1/username.html', {'username': username})
 
 def show_seach(request):
     name = request.GET.get('search')
@@ -56,7 +55,7 @@ def show_books(request, id):
     return None
 
 def hello_django(request):
-    return render(request, 'django.html')
+    return render(request, 'lesson_1/django.html')
 
 def django_info(request):
     context = {
@@ -74,7 +73,7 @@ def django_info(request):
             </ul>
         '''
     }
-    return render(request, 'django_info.html', context)
+    return render(request, 'lesson_1/django_info.html', context)
 
 def product_list(request):
     products = [
@@ -104,8 +103,7 @@ def product_list(request):
         },
     ]
     context = {'products': products}
-    return render(request, 'products_list.html', context)
-
+    return render(request, 'lesson_1/products_list.html', context)
 
 def show_category(request, category):
     with open('datas/products.json', 'r') as f:
@@ -117,4 +115,41 @@ def show_category(request, category):
         if 'category' in product and category.lower() in product.get("category", "").lower():
             filtered_products.append(product)
 
-    return render(request, 'show_category.html', {'products': filtered_products, 'name': category})
+    return render(request, 'lesson_1/show_category.html', {'products': filtered_products, 'name': category})
+
+def users(request):
+    users = User.objects.all()
+    return render(request, 'lesson_2/users_list.html', {'users': users})
+
+def send_jobs(request):
+    jobs = Job.objects.all()
+    return render(request, 'lesson_2/jobs.html', {'jobs': jobs})
+
+def send_products(request):
+    products = Product.objects.all()
+    return render(request, 'lesson_2/products.html', {'products': products})
+
+def show_plans(request):
+    plans = Plan.objects.all()
+    return render(request, 'lesson_2/plans.html', {'plans': plans})
+
+def send_products_list(request):
+    products = Product.objects.all()
+    return render(request, 'lesson_2/products_list.html', {'products': products})
+
+
+def home(request):
+    return render(request, 'lesson_3/home.html')
+
+def home_page(request):
+    return render(request, 'lesson_3/home-page.html')
+
+def only_products(request):
+    products = OnlyProduct.objects.all()
+    return render(request, 'lesson_3/only_products_images.html', {'products': products})
+
+
+def to_product(request, pk):
+    product = OnlyProduct.objects.get(pk=pk)
+    images = product.images.all()
+    return render(request, 'lesson_3/one_product.html', {'product': product, 'images': images})
