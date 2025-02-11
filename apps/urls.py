@@ -1,6 +1,6 @@
 from django.urls import path
 from . import views
-
+from .views import CarFormView
 
 urlpatterns = [
     # path('say_hello/', views.say_hello),
@@ -20,6 +20,7 @@ urlpatterns = [
     # path('show_products_list/', views.send_products_list),
     # path('home/', views.home, name='home'),
     # path('home-page/', views.home_page, name='home-page'),
-    path('products/', views.only_products, name='products'),
-    path('product_detail/<int:pk>/', views.to_product, name='product_detail'),
+    # path('products/', views.only_products, name='products'),
+    # path('product_detail/<int:pk>/', views.to_product, name='product_detail'),
+    path('car/', CarFormView.as_view(), name='car'),
 ]

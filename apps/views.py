@@ -1,7 +1,13 @@
 import json
+
+from django.contrib import messages
 from django.contrib.auth.models import User
 from django.http import JsonResponse
 from django.shortcuts import render
+from django.urls import reverse_lazy
+from django.views.generic import FormView
+
+from apps.forms import CarForm
 from apps.models import Job, Product, Plan, OnlyProduct, Images
 
 
@@ -153,3 +159,20 @@ def to_product(request, pk):
     product = OnlyProduct.objects.get(pk=pk)
     images = product.images.all()
     return render(request, 'lesson_3/one_product.html', {'product': product, 'images': images})
+
+
+
+
+class CarFormView(FormView):
+    template_name = 'lesson_8/car.html'
+    form_class = CarForm
+    success_url = reverse_lazy('car')
+
+    def form_valid(self, form):
+        form.save()
+        return super().form_valid(form)
+
+    def form_invalid(self, form):
+        for message in form.errors.values():
+            messages.error(self.request, message)
+        return super().form_invalid(form)

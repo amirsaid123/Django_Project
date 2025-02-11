@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add a Car</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            flex-direction: column;
+            margin: 0;
+        }
+        .form-container {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 300px;
+            text-align: center;
+        }
+        input, button {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        button {
+            background-color: #27ae60;
+            color: white;
+            font-size: 1em;
+            border: none;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        button:hover {
+            background-color: #219150;
+        }
+    </style>
+</head>
+<body>
+    {% if messages %}
+        {% for message in messages %}
+        	<h4>
+            {{ message }}
+            </h4>
+        {% endfor %}
+
+
+    {% endif %}
+    <h1>Add a Car</h1>
+    <div class="form-container">
+        <form action="{% url 'car' %}" method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            <input type="text" name="name" placeholder="Car Name" required>
+            <input type="number" step="0.01" name="price" placeholder="Price ($)" required>
+            <input type="number" step="0.01" name="speed" placeholder="Speed (km/h)" required>
+            <input type="number" name="km" placeholder="Mileage (km)" required>
+            <button type="submit">Add Car</button>
+        </form>
+    </div>
+</body>
+</html>

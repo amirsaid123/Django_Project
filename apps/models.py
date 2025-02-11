@@ -76,3 +76,18 @@ class OnlyProduct(Model):
 class Images(Model):
     image = ImageField(upload_to="images/")
     product = ForeignKey(OnlyProduct, on_delete=CASCADE, related_name="images")
+
+
+from django.db.models import Model, CharField, DecimalField, PositiveBigIntegerField
+
+
+class Car(Model):
+    name = CharField(max_length=100)
+    price = DecimalField(max_digits=10, decimal_places=2)
+    speed = DecimalField(max_digits=6, decimal_places=2)
+    km = PositiveBigIntegerField()
+
+    def __str__(self):
+        return self.name
+
+
